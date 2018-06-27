@@ -1,0 +1,103 @@
+{
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "name": "reactive-apps/command-metrics",
+    "require": {
+        "php": "^7.2",
+        "reactive-apps/command": "dev-master",
+        "reactive-apps/rx-streams": "dev-master",
+        "wyrihaximus/psr-3-callable-throwable-logger": "^1.0",
+        "wyrihaximus/psr-3-context-logger": "^1.0",
+        "wyrihaximus/react-inspector": "dev-master",
+        "wyrihaximus/react-inspector-event-loop": "dev-master",
+        "wyrihaximus/react-inspector-stream": "dev-master"
+    },
+    "require-dev": {
+        "api-clients/test-utilities": "^4.2",
+        "monolog/monolog": "^1.23"
+    },
+    "extra": {
+        "php-di-definitions": {
+          "di": [
+            "config/di/http-server.php"
+          ]
+        },
+        "reactive-apps": {
+            "command": {
+                "ReactiveApps\\Command\\Metrics\\Command": "src"
+            },
+            "required-config": {
+                "metrics.handler": "Callable that handles the incoming request"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "7.2"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "ReactiveApps\\Command\\Metrics\\Command\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ReactiveApps\\Tests\\Command\\Metrics\\Command\\": "tests/"
+        }
+    },
+    "scripts": {
+        "ensure-installed": "composer install --ansi -n -q",
+        "cs": [
+            "@ensure-installed",
+            "php-cs-fixer fix --config=.php_cs --ansi --dry-run --diff --verbose --allow-risky=yes --show-progress=estimating"
+        ],
+        "cs-fix": [
+            "@ensure-installed",
+            "php-cs-fixer fix --config=.php_cs --ansi --verbose --allow-risky=yes --show-progress=estimating"
+        ],
+        "unit": [
+            "@ensure-installed",
+            "phpunit --colors=always -c phpunit.xml.dist"
+        ],
+        "unit-coverage": [
+            "@ensure-installed",
+            "phpunit --colors=always -c phpunit.xml.dist --coverage-text --coverage-html covHtml --coverage-clover ./build/logs/clover.xml"
+        ],
+        "lint-php": [
+            "@ensure-installed",
+            "parallel-lint --exclude vendor ."
+        ],
+        "qa-all": [
+            "@lint-php",
+            "@cs",
+            "@unit"
+        ],
+        "qa-all-coverage": [
+            "@lint-php",
+            "@cs",
+            "@unit-coverage"
+        ],
+        "qa-windows": [
+            "@lint-php",
+            "@cs",
+            "@unit"
+        ],
+        "qa-ci": [
+            "@unit"
+        ],
+        "qa-ci-extended": [
+            "@qa-all-coverage"
+        ],
+        "qa-ci-windows": [
+            "@qa-windows"
+        ],
+        "qa-contrib": [
+            "@qa-all"
+        ],
+        "ci-coverage": [
+            "if [ -f ./build/logs/clover.xml ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover ./build/logs/clover.xml; fi"
+        ]
+    }
+}
