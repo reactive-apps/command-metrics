@@ -19,7 +19,7 @@
     "extra": {
         "php-di-definitions": {
           "di": [
-            "config/di/http-server.php"
+            "config/di/metrics.php"
           ]
         },
         "reactive-apps": {
