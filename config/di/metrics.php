@@ -11,9 +11,8 @@ return [
     MetricsStreamInterface::class => \DI\factory(function (
         LoopInterface $loop
     ) {
-        return new InspectorMetrics($loop);
-    })
-    ->parameter('handler', \DI\get('config.metrics.handler')),
+        return new InspectorMetrics($loop, ['totals', 'ticks', 'io'], 1.0);
+    }),
     Metrics::class => \DI\factory(function (
         MetricsStreamInterface $metrics,
         callable $handler,
