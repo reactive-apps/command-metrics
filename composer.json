@@ -13,7 +13,7 @@
         "wyrihaximus/react-inspector-stream": "dev-master"
     },
     "require-dev": {
-        "api-clients/test-utilities": "^4.2",
+        "api-clients/test-utilities": "^5.0",
         "monolog/monolog": "^1.23"
     },
     "extra": {
