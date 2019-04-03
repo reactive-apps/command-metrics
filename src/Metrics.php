@@ -24,11 +24,6 @@ final class Metrics implements Command
     private $handler;
 
     /**
-     * @var Shutdown
-     */
-    private $shutdown;
-
-    /**
      * @var LoggerInterface
      */
     private $logger;
@@ -36,14 +31,12 @@ final class Metrics implements Command
     /**
      * @param MetricsStreamInterface $metrics
      * @param callable $handler
-     * @param Shutdown $shutdown
      * @param LoggerInterface $logger
      */
-    public function __construct(MetricsStreamInterface $metrics, callable $handler, Shutdown $shutdown, LoggerInterface $logger)
+    public function __construct(MetricsStreamInterface $metrics, callable $handler, LoggerInterface $logger)
     {
         $this->metrics = $metrics;
         $this->handler = $handler;
-        $this->shutdown = $shutdown;
         $this->logger = new ContextLogger(
             $logger,
             [
@@ -55,9 +48,6 @@ final class Metrics implements Command
 
     public function __invoke()
     {
-        $disposable = $this->metrics->subscribe($this->handler, CallableThrowableLogger::create($this->logger));
-        $this->shutdown->subscribe(null, null, function () use ($disposable) {
-            $disposable->dispose();
-        });
+        $this->metrics->subscribe($this->handler, CallableThrowableLogger::create($this->logger));
     }
 }

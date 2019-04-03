@@ -28,6 +28,11 @@
             },
             "required-config": {
                 "metrics.handler": "Callable that handles the incoming request"
+            },
+            "listeners": {
+                "ReactiveApps\\Event\\Shutdown": [
+                    "src/Listener/Shutdown.php"
+                ]
             }
         }
     },
