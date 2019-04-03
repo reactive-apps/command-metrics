@@ -26,6 +26,6 @@ final class Shutdown
     public function __invoke(): void
     {
         $this->metrics->onComplete();
-        $this->logger->debug('Closed listening socket for new incoming requests');
+        $this->logger->debug('Stopped the metrics stream');
     }
 }
