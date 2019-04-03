@@ -24,7 +24,7 @@
         },
         "reactive-apps": {
             "command": {
-                "ReactiveApps\\Command\\Metrics\\Command": "src"
+                "ReactiveApps\\Command\\Metrics\\Command": "src/Command"
             },
             "required-config": {
                 "metrics.handler": "Callable that handles the incoming request"
@@ -44,12 +44,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ReactiveApps\\Command\\Metrics\\Command\\": "src/"
+            "ReactiveApps\\Command\\Metrics\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ReactiveApps\\Tests\\Command\\Metrics\\Command\\": "tests/"
+            "ReactiveApps\\Tests\\Command\\Metrics\\": "tests/"
         }
     },
     "scripts": {
