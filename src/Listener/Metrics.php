@@ -5,7 +5,7 @@ namespace ReactiveApps\Command\Metrics\Listener;
 use Psr\Log\LoggerInterface;
 use WyriHaximus\React\Inspector\MetricsStreamInterface;
 
-final class Shutdown
+final class Metrics
 {
     /** @var MetricsStreamInterface */
     private $metrics;
@@ -15,7 +15,7 @@ final class Shutdown
 
     /**
      * @param MetricsStreamInterface $metrics
-     * @param LoggerInterface $logger
+     * @param LoggerInterface        $logger
      */
     public function __construct(MetricsStreamInterface $metrics, LoggerInterface $logger)
     {

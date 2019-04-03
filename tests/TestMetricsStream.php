@@ -7,5 +7,4 @@ use WyriHaximus\React\Inspector\MetricsStreamInterface;
 
 final class TestMetricsStream extends Subject implements MetricsStreamInterface
 {
-
 }

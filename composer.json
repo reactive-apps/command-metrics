@@ -31,7 +31,7 @@
             },
             "listeners": {
                 "ReactiveApps\\Event\\Shutdown": [
-                    "src/Listener/Shutdown.php"
+                    "src/Listener/Metrics.php"
                 ]
             }
         }
