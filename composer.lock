@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd42ce4bb84f6913424f12b4ecbc4473",
+    "content-hash": "886b8d44944dbf6ae2e641edd02be06a",
     "packages": [
         {
             "name": "api-clients/rx",
@@ -2571,16 +2571,16 @@
         },
         {
             "name": "nette/di",
-            "version": "v3.0.0-RC5",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/di.git",
-                "reference": "ea225222cdf8bf13ff046f8719a86d3cd5d6372d"
+                "reference": "19d83539245aaacb59470828919182411061841f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/di/zipball/ea225222cdf8bf13ff046f8719a86d3cd5d6372d",
-                "reference": "ea225222cdf8bf13ff046f8719a86d3cd5d6372d",
+                "url": "https://api.github.com/repos/nette/di/zipball/19d83539245aaacb59470828919182411061841f",
+                "reference": "19d83539245aaacb59470828919182411061841f",
                 "shasum": ""
             },
             "require": {
@@ -2596,7 +2596,7 @@
                 "nette/bootstrap": "<3.0"
             },
             "require-dev": {
-                "nette/tester": "^2.0",
+                "nette/tester": "^2.2",
                 "tracy/tracy": "^2.3"
             },
             "type": "library",
@@ -2640,7 +2640,7 @@
                 "nette",
                 "static"
             ],
-            "time": "2019-04-02T11:56:59+00:00"
+            "time": "2019-04-03T19:35:46+00:00"
         },
         {
             "name": "nette/finder",

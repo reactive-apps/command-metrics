@@ -26,9 +26,6 @@
             "command": {
                 "ReactiveApps\\Command\\Metrics\\Command": "src/Command"
             },
-            "required-config": {
-                "metrics.handler": "Callable that handles the incoming request"
-            },
             "listeners": {
                 "ReactiveApps\\Event\\Shutdown": [
                     "src/Listener/Metrics.php"
