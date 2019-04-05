@@ -5,7 +5,6 @@
     "require": {
         "php": "^7.2",
         "reactive-apps/command": "dev-master",
-        "reactive-apps/rx-streams": "dev-master",
         "wyrihaximus/psr-3-callable-throwable-logger": "^1.0",
         "wyrihaximus/psr-3-context-logger": "^1.0",
         "wyrihaximus/react-inspector": "dev-master",
