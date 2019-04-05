@@ -19,8 +19,8 @@ final class Metrics
 
     /**
      * @param MetricsStreamInterface $metrics
-     * @param HandlerInterface $handler
-     * @param LoggerInterface $logger
+     * @param HandlerInterface       $handler
+     * @param LoggerInterface        $logger
      */
     public function __construct(MetricsStreamInterface $metrics, HandlerInterface $handler, LoggerInterface $logger)
     {
@@ -32,7 +32,8 @@ final class Metrics
     public function __invoke(): void
     {
         $this->metrics->onComplete();
-        $this->handler->shutdown();
         $this->logger->debug('Stopped the metrics stream');
+        $this->handler->shutdown();
+        $this->logger->debug('Shutdown the metrics handler');
     }
 }
