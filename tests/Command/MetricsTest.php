@@ -7,6 +7,8 @@ use Psr\Log\LoggerInterface;
 use React\EventLoop\Factory;
 use ReactiveApps\Command\Metrics\Command\Metrics;
 use ReactiveApps\Command\Metrics\HandlerInterface;
+use ReactiveApps\LifeCycleEvents\Promise\Shutdown;
+use Recoil\React\ReactKernel;
 use WyriHaximus\React\Inspector\Metric;
 use WyriHaximus\React\Inspector\Metrics as InspectorMetrics;
 
@@ -34,13 +36,16 @@ final class MetricsTest extends TestCase
         };
 
         $loop = Factory::create();
+        $kernel = ReactKernel::create($loop);
         $metricsStream = new InspectorMetrics($loop, ['ticks'], 1.0);
         $logger = $this->prophesize(LoggerInterface::class);
+        $shutdown = new Shutdown();
 
-        $loop->futureTick(function () use ($metricsStream, $metricsHandler, $logger): void {
-            (new Metrics($metricsStream, $metricsHandler, $logger->reveal()))();
+        $kernel->execute(function () use ($metricsStream, $metricsHandler, $logger, $shutdown) {
+            yield (new Metrics($metricsStream, $metricsHandler, $logger->reveal(), $shutdown))();
         });
-        $loop->addTimer(5, function () use ($loop): void {
+        $loop->addTimer(5, function () use ($loop, $shutdown): void {
+            $shutdown();
             $loop->stop();
         });
         $loop->run();

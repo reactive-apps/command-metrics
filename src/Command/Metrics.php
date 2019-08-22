@@ -5,6 +5,7 @@ namespace ReactiveApps\Command\Metrics\Command;
 use Psr\Log\LoggerInterface;
 use ReactiveApps\Command\Command;
 use ReactiveApps\Command\Metrics\HandlerInterface;
+use ReactiveApps\LifeCycleEvents\Promise\Shutdown;
 use WyriHaximus\PSR3\CallableThrowableLogger\CallableThrowableLogger;
 use WyriHaximus\PSR3\ContextLogger\ContextLogger;
 use WyriHaximus\React\Inspector\MetricsStreamInterface;
@@ -29,11 +30,17 @@ final class Metrics implements Command
     private $logger;
 
     /**
+     * @var Shutdown
+     */
+    private $shutdown;
+
+    /**
      * @param MetricsStreamInterface $metrics
      * @param HandlerInterface       $handler
      * @param LoggerInterface        $logger
+     * @param Shutdown               $shutdown
      */
-    public function __construct(MetricsStreamInterface $metrics, HandlerInterface $handler, LoggerInterface $logger)
+    public function __construct(MetricsStreamInterface $metrics, HandlerInterface $handler, LoggerInterface $logger, Shutdown $shutdown)
     {
         $this->metrics = $metrics;
         $this->handler = $handler;
@@ -44,10 +51,15 @@ final class Metrics implements Command
             ],
             'command-metrics'
         );
+        $this->shutdown = $shutdown;
     }
 
-    public function __invoke(): void
+    public function __invoke()
     {
         $this->metrics->subscribe([$this->handler, 'handle'], CallableThrowableLogger::create($this->logger));
+
+        yield $this->shutdown;
+
+        return 0;
     }
 }

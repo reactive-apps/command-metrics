@@ -5,6 +5,7 @@
     "require": {
         "php": "^7.2",
         "reactive-apps/command": "dev-master",
+        "reactive-apps/life-cycle-events": "dev-master",
         "wyrihaximus/psr-3-callable-throwable-logger": "^1.0",
         "wyrihaximus/psr-3-context-logger": "^1.0",
         "wyrihaximus/react-inspector": "dev-master",
@@ -13,7 +14,9 @@
     },
     "require-dev": {
         "api-clients/test-utilities": "^5.0",
-        "monolog/monolog": "^1.23"
+        "monolog/monolog": "^1.23",
+        "recoil/react": "^1.0",
+        "recoil/recoil": "^1.0"
     },
     "extra": {
         "php-di-definitions": {
@@ -26,7 +29,7 @@
                 "ReactiveApps\\Command\\Metrics\\Command": "src/Command"
             },
             "listeners": {
-                "ReactiveApps\\Event\\Shutdown": [
+                "ReactiveApps\\LifeCycleEvents\\Shutdown": [
                     "src/Listener/Metrics.php"
                 ]
             }
