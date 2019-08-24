@@ -9,6 +9,7 @@ use ReactiveApps\LifeCycleEvents\Promise\Shutdown;
 use WyriHaximus\PSR3\CallableThrowableLogger\CallableThrowableLogger;
 use WyriHaximus\PSR3\ContextLogger\ContextLogger;
 use WyriHaximus\React\Inspector\MetricsStreamInterface;
+use function React\Promise\resolve;
 
 final class Metrics implements Command
 {
@@ -58,7 +59,7 @@ final class Metrics implements Command
     {
         $this->metrics->subscribe([$this->handler, 'handle'], CallableThrowableLogger::create($this->logger));
 
-        yield $this->shutdown;
+        yield resolve($this->shutdown);
 
         return 0;
     }
