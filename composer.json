@@ -14,7 +14,7 @@
     },
     "require-dev": {
         "api-clients/test-utilities": "^5.0",
-        "monolog/monolog": "^1.23",
+        "monolog/monolog": "^2.0",
         "recoil/react": "^1.0",
         "recoil/recoil": "^1.0"
     },
