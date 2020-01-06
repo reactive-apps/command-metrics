@@ -3,13 +3,13 @@
 namespace ReactiveApps\Command\Metrics\Command;
 
 use Psr\Log\LoggerInterface;
+use function React\Promise\resolve;
+use ReactInspector\MetricsStreamInterface;
 use ReactiveApps\Command\Command;
 use ReactiveApps\Command\Metrics\HandlerInterface;
 use ReactiveApps\LifeCycleEvents\Promise\Shutdown;
 use WyriHaximus\PSR3\CallableThrowableLogger\CallableThrowableLogger;
 use WyriHaximus\PSR3\ContextLogger\ContextLogger;
-use WyriHaximus\React\Inspector\MetricsStreamInterface;
-use function React\Promise\resolve;
 
 final class Metrics implements Command
 {

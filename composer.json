@@ -3,14 +3,12 @@
     "prefer-stable": true,
     "name": "reactive-apps/command-metrics",
     "require": {
-        "php": "^7.2",
+        "php": "^7.3",
+        "react-inspector/metrics": "dev-master",
         "reactive-apps/command": "dev-master",
         "reactive-apps/life-cycle-events": "dev-master",
         "wyrihaximus/psr-3-callable-throwable-logger": "^1.0",
-        "wyrihaximus/psr-3-context-logger": "^1.0",
-        "wyrihaximus/react-inspector": "dev-master",
-        "wyrihaximus/react-inspector-event-loop": "dev-master",
-        "wyrihaximus/react-inspector-stream": "dev-master"
+        "wyrihaximus/psr-3-context-logger": "^1.0"
     },
     "require-dev": {
         "api-clients/test-utilities": "^5.0",
@@ -38,7 +36,7 @@
     "config": {
         "sort-packages": true,
         "platform": {
-            "php": "7.2"
+            "php": "7.3"
         }
     },
     "autoload": {

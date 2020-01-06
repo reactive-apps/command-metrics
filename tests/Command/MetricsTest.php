@@ -2,15 +2,20 @@
 
 namespace ReactiveApps\Tests\Command\Metrics\Command;
 
+use function ApiClients\Tools\Rx\observableFromArray;
 use ApiClients\Tools\TestUtilities\TestCase;
 use Psr\Log\LoggerInterface;
 use React\EventLoop\Factory;
+use ReactInspector\CollectorInterface;
+use ReactInspector\Measurement;
+use ReactInspector\Metric;
+use ReactInspector\Metrics as InspectorMetrics;
+use ReactInspector\Tag;
 use ReactiveApps\Command\Metrics\Command\Metrics;
 use ReactiveApps\Command\Metrics\HandlerInterface;
 use ReactiveApps\LifeCycleEvents\Promise\Shutdown;
 use Recoil\React\ReactKernel;
-use WyriHaximus\React\Inspector\Metric;
-use WyriHaximus\React\Inspector\Metrics as InspectorMetrics;
+use Rx\Observable;
 
 /**
  * @internal
@@ -35,9 +40,31 @@ final class MetricsTest extends TestCase
             }
         };
 
+        $collector = new class() implements CollectorInterface {
+            public function collect(): Observable
+            {
+                return observableFromArray([
+                    new Metric(
+                        'test',
+                        [
+                            new Tag('top_level', 'tag'),
+                        ],
+                        [
+                            new Measurement(0.123),
+                        ]
+                    ),
+                ]);
+            }
+
+            public function cancel(): void
+            {
+                // void
+            }
+        };
+
         $loop = Factory::create();
         $kernel = ReactKernel::create($loop);
-        $metricsStream = new InspectorMetrics($loop, ['ticks'], 1.0);
+        $metricsStream = new InspectorMetrics($loop, 1.0, $collector);
         $logger = $this->prophesize(LoggerInterface::class);
         $shutdown = new Shutdown();
 
@@ -51,7 +78,7 @@ final class MetricsTest extends TestCase
         $loop->run();
         //self::assertSame(0, gc_collect_cycles());
 
-        self::assertCount(112, $metricsHandler->metrics);
+        self::assertCount(4, $metricsHandler->metrics);
         foreach ($metricsHandler->metrics as $metric) {
             self::assertInstanceOf(Metric::class, $metric);
         }

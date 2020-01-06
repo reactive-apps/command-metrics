@@ -3,8 +3,8 @@
 namespace ReactiveApps\Command\Metrics\Listener;
 
 use Psr\Log\LoggerInterface;
+use ReactInspector\MetricsStreamInterface;
 use ReactiveApps\Command\Metrics\HandlerInterface;
-use WyriHaximus\React\Inspector\MetricsStreamInterface;
 
 final class Metrics
 {

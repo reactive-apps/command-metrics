@@ -2,8 +2,8 @@
 
 namespace ReactiveApps\Tests\Command\Metrics\Command;
 
+use ReactInspector\MetricsStreamInterface;
 use Rx\Subject\Subject;
-use WyriHaximus\React\Inspector\MetricsStreamInterface;
 
 final class TestMetricsStream extends Subject implements MetricsStreamInterface
 {

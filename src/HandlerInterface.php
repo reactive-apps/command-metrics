@@ -2,7 +2,7 @@
 
 namespace ReactiveApps\Command\Metrics;
 
-use WyriHaximus\React\Inspector\Metric;
+use ReactInspector\Metric;
 
 interface HandlerInterface
 {
