@@ -7,7 +7,7 @@
         "react-inspector/metrics": "dev-master",
         "reactive-apps/command": "dev-master",
         "reactive-apps/life-cycle-events": "dev-master",
-        "wyrihaximus/psr-3-callable-throwable-logger": "^1.0",
+        "wyrihaximus/psr-3-callable-throwable-logger": "^2.0",
         "wyrihaximus/psr-3-context-logger": "^1.0"
     },
     "require-dev": {
